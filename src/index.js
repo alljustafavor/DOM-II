@@ -113,3 +113,14 @@ images.forEach((img) => {
         }
     })
 })
+
+const changeScrollColor = (element, color) => {
+    element.style.backgroundColor = color
+}
+
+destinations.forEach((dest) => {
+    dest.addEventListener("wheel", (evt) => {
+        changeScrollColor(dest, "yellow")
+    })
+})
+
