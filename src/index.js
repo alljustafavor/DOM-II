@@ -5,7 +5,7 @@ const signUpBtn = Array.from(document.querySelectorAll(".btn"));
 const navLinks = document.querySelectorAll("a");
 const images = Array.from(document.images);
 const webpageText = Array.from(document.querySelectorAll("h1, a, h2, p, h3, h4"));
-const copyright = document.querySelector(".footer p");
+const copyright = document.querySelector(".footer");
 const destinations = Array.from(document.querySelectorAll(".destination"));
 const mainContent = document.querySelector(".home");
 const logo = document.querySelector(".logo-heading");
@@ -27,4 +27,45 @@ navLinksArr.forEach((link) => {
     })
 })
 
+const wheelForFontSize = (element, fontSize) => {
+    element.style.fontSize = fontSize;
+}
 
+webpageText.forEach((text) => {
+    text.addEventListener("wheel", (evt) => {
+        wheelForFontSize(text, "35px")
+    })
+})
+
+const loadEvent = (element, color) => {
+    element.style.backgroundColor = color;
+}
+
+window.addEventListener("load", (evt) => {
+    loadEvent(copyright, "yellow");
+});
+
+const logoClickEvt = (element, font) => {
+    element.style.font = font;
+}
+
+window.addEventListener("click", (evt) => {
+    logoClickEvt(logo, "italic bold 20px arial,serif");
+})
+
+const changeImgSize = (element, amount) => {
+    element.style.height = `${element.offsetWidth + amount}px`;
+    element.style.width = `${element.offsetHeight + amount}px`
+};
+
+window.addEventListener("keydown", (evt) => {
+    if(evt.key === "ArrowUp") {
+        images.forEach((img) => {
+            changeImgSize(img, 10);
+        });
+    } else if(evt.key === "ArrowDown") {
+        images.forEach((img) => {
+            changeImgSize(img, -10)
+        })
+    }
+})
