@@ -69,3 +69,47 @@ window.addEventListener("keydown", (evt) => {
         })
     }
 })
+
+//TODO - reader.readAsDataURL(file);
+//REVIEW - event.dataTransfer.files The const files = event.dataTransfer.files statement is used to get the files that were dragged and dropped onto an element. 
+// The event object is the event object that is passed to the event handler. 
+// The dataTransfer property of the event object contains the data that was dragged and dropped. 
+// The files property of the dataTransfer object contains an array of file objects. The file objects contain information about the files that were dragged and dropped,
+// such as the name, size, and type of the files.
+
+//REVIEW - file.type.startsWith('image/')The startsWith() method is used to check if a string starts with another string.
+// The startsWith() method is used to check if a string starts with another string.
+
+//REVIEW - const reader = new FileReader(); The const reader = new FileReader() statement is used to create a new FileReader object. The FileReader object is used to read the contents of files. The new FileReader() constructor takes no arguments.
+// The FileReader object has a number of methods that can be used to read the contents of files, including:
+// readAsArrayBuffer(): Reads the contents of the file as an array of bytes.
+// readAsDataURL(): Reads the contents of the file as a data URL.
+// readAsText(): Reads the contents of the file as a text string.
+// The FileReader object also has a number of events that can be used to track the progress of the reading operation, including:
+// onload: Fired when the reading operation is complete.
+// onerror: Fired when an error occurs during the reading operation.
+
+//REVIEW - reader.onload onload: Fired when the reading operation is complete.
+
+//REVIEW - reader.readAsDataURL(file); readAsDataURL(): Reads the contents of the file as a data URL.
+
+images.forEach((img) => {
+    img.addEventListener("dragover", (evt) => {
+        evt.preventDefault();
+    })
+
+    img.addEventListener("drop", (evt) => {
+        evt.preventDefault();
+        const files = evt.dataTransfer.files;
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (evt) => {
+                    img.src = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    })
+})
